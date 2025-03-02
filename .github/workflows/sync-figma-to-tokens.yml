@@ -34,6 +34,13 @@ jobs:
       # - name: Clear tokens directory for demo
       #   run: bash cleanup.sh
 
+      - name: Debug API Request
+        run: |
+          echo "Testing Figma API Request"
+          curl -H "X-Figma-Token: ${{ secrets.PERSONAL_ACCESS_TOKEN }}" \
+               "https://api.figma.com/v1/files/${{ secrets.FILE_KEY }}/variables/local"
+
+
       - name: Sync variables in Figma file to tokens
         run: npm run sync-figma-to-tokens -- --output tokens
         env:
